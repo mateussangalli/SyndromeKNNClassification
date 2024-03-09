@@ -5,12 +5,13 @@ from sklearn import metrics as skl_metrics
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+import argparse
 
 
 CROSS_VALIDATION_SPLITS = 10
 NUM_CLASSES = 10
+DATA_PATH = "mini_gm_public_v0.1.p"
 
-data = np.load("mini_gm_public_v0.1.p", allow_pickle=True)
 
 
 def extract_subjects(data):
@@ -163,7 +164,13 @@ def plot_roc_curves(roc_cos, roc_euc, auc_cos, auc_euc, output_path):
 
 
 if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--data_path', type=str, default=DATA_PATH)
+    args = parser.parse_args()
+
     seed = 999
+    data = np.load(args.data_path, allow_pickle=True)
 
     # create a table to save the averages and standard deviations of the results
     averages = {'name': list(), 'AUC': list(), 'precision': list(), 'recall': list(), 'fscore': list()}

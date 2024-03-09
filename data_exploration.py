@@ -1,8 +1,10 @@
 import numpy as np
 from sklearn.manifold import TSNE
-from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 import pandas as pd
+import argparse
+
+DATA_PATH = 'mini_gm_public_v0.1.p'
 
 def get_class_distribution(data):
     """
@@ -58,7 +60,11 @@ def plot_tsne_graphs(data):
     plt.show()
 
 if __name__ == "__main__":
-    data = np.load('mini_gm_public_v0.1.p', allow_pickle=True)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--data_path', type=str, default=DATA_PATH)
+    args = parser.parse_args()
+
+    data = np.load(args.data_path, allow_pickle=True)
 
     get_class_distribution(data)
     plot_tsne_graphs(data)
