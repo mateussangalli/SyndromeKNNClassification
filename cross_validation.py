@@ -141,7 +141,7 @@ def evaluate(data, num_neighbors, metric_function, seed=None):
 
     return output_metrics, (fpr, tpr)
 
-def plot_roc_curves(roc_cos, roc_euc, output_path):
+def plot_roc_curves(roc_cos, roc_euc, auc_cos, auc_euc, output_path):
     """
     Plot the two ROC curves
     """
@@ -152,8 +152,8 @@ def plot_roc_curves(roc_cos, roc_euc, output_path):
     fpr_cos, tpr_cos = roc_cos
     fpr_euc, tpr_euc = roc_euc
 
-    plt.step(fpr_cos, tpr_cos, color='blue', label='cosine', where='post')
-    plt.step(fpr_euc, tpr_euc, color='green', label='Euclidean', where='post')
+    plt.step(fpr_cos, tpr_cos, color='blue', label=f'cosine (AUC={auc_cos:.2f})', where='post')
+    plt.step(fpr_euc, tpr_euc, color='green', label=f'Euclidean (AUC={auc_euc:.2f})', where='post')
     plt.grid()
     plt.legend()
     plt.xlabel('False Positive Rate')
@@ -184,7 +184,7 @@ if __name__ == "__main__":
         metrics_euclidean.to_csv(os.path.join('results', f'metrics_euclidean_{k}.csv'))
 
         # save roc curves
-        plot_roc_curves(roc_cos, roc_euc, os.path.join('results', f'roc_curves_{k}.pdf'))
+        plot_roc_curves(roc_cos, roc_euc, metrics_cosine['AUC'].mean(), metrics_euclidean['AUC'].mean(), os.path.join('results', f'roc_curves_{k}.pdf'))
 
         # print the statistics of this fold's results
         print(f'cosine metric, {k=}')
