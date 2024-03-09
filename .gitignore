@@ -1,0 +1,7 @@
+__pycache__
+mini_gm_public_v0.1.p
+.pytest_cache
+results
+data_quantities.ods
+data_quantities.csv
+tsne.pdf
