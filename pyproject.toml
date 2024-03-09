@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "knn-syndrome-classification"
+version = "0.1.0"
+description = ""
+authors = ["msangalli <mateussangalli@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.26.4"
+pandas = "^2.2.1"
+matplotlib = "^3.8.3"
+scikit-learn = "^1.4.1.post1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
